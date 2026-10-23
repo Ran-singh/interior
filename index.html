@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nirmaan Studio | Construction, Architecture & Interior Design</title>
+  <meta name="description" content="Nirmaan Studio - one stop solution for construction, architecture and interior design.">
+  <!-- Bootstrap 5 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Our own CSS -->
+  <!-- Internal CSS (same as assets/css/style.css) -->
+<style>
+/* =====================================================
+   NIRMAAN STUDIO - Main Stylesheet
+   Sections: 1 Variables | 2 Base | 3 Preloader | 4 Navbar
+   5 Hero | 6 Common | 7 Services | 8 Projects | 9 Process
+   10 Calculator | 11 Testimonials | 12 Forms | 13 Footer
+   14 Animations | 15 Responsive
+   ===================================================== */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  --ink: #14110f;        /* dark background */
+  --ink-soft: #1f1a17;   /* slightly lighter dark */
+  --cream: #f6f1e9;      /* light background */
+  --sand: #e9dfd0;       /* border / soft sections */
+  --gold: #c8a46a;       /* main accent */
+  --terra: #b5573a;      /* second accent */
+  --text: #3b3530;       /* body text */
+  --muted: #8a8077;      /* muted text */
+  --radius: 18px;
+  --shadow: 0 20px 50px rgba(20, 17, 15, .12);
+  --font-head: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+/* ---------- 2. BASE ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+h1, h2, h3, h4, h5 { font-family: var(--font-head); color: var(--ink); line-height: 1.2; }
+a { text-decoration: none; transition: .3s; }
+img { max-width: 100%; display: block; }
+section { padding: 100px 0; position: relative; }
+::selection { background: var(--gold); color: var(--ink); }
+
+/* Image fallback (if internet image fails to load) */
+img.img-fallback { background: linear-gradient(135deg, #3a2f28, #6b5645); min-height: 200px; }
+
+/* ---------- 3. PRELOADER ---------- */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--ink);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity .6s, visibility .6s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.loader-logo { font-family: var(--font-head); font-size: 2.4rem; color: var(--gold); letter-spacing: 8px; }
+.loader-bar { width: 180px; height: 3px; background: #333; margin-top: 20px; overflow: hidden; border-radius: 3px; }
+.loader-bar span { display: block; height: 100%; width: 0; background: var(--gold); animation: loadbar 1.4s ease forwards; }
+@keyframes loadbar { to { width: 100%; } }
+
+/* ---------- 4. NAVBAR ---------- */
+.main-nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 22px 0; transition: .4s;
+}
+.main-nav.scrolled {
+  background: rgba(20, 17, 15, .95);
+  backdrop-filter: blur(10px);
+  padding: 12px 0;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .25);
+}
+.brand { font-family: var(--font-head); font-size: 1.7rem; color: #fff; letter-spacing: 4px; font-weight: 700; }
+.brand span { color: var(--gold); }
+.brand:hover { color: #fff; }
+.main-nav .nav-link {
+  color: #ece4d8 !important; font-size: .9rem; margin: 0 8px;
+  position: relative; padding: 6px 0 !important; letter-spacing: .5px;
+}
+.main-nav .nav-link::after {
+  content: ''; position: absolute; left: 0; bottom: 0;
+  width: 0; height: 2px; background: var(--gold); transition: .3s;
+}
+.main-nav .nav-link:hover::after, .main-nav .nav-link.active::after { width: 100%; }
+.navbar-toggler { border: 1px solid var(--gold); }
+.navbar-toggler-icon { filter: invert(1); }
+.btn-gold {
+  background: var(--gold); color: var(--ink); border: 2px solid var(--gold);
+  padding: 12px 30px; border-radius: 50px; font-weight: 600; font-size: .9rem;
+  position: relative; overflow: hidden; z-index: 1;
+}
+.btn-gold:hover { background: transparent; color: var(--gold); transform: translateY(-3px); }
+.btn-outline-light-x {
+  border: 2px solid rgba(255,255,255,.6); color: #fff;
+  padding: 12px 30px; border-radius: 50px; font-weight: 500; font-size: .9rem;
+}
+.btn-outline-light-x:hover { background: #fff; color: var(--ink); transform: translateY(-3px); }
+
+/* ---------- 5. HERO ---------- */
+.hero { height: 100vh; min-height: 650px; padding: 0; overflow: hidden; display: flex; align-items: center; background: var(--ink); }
+.hero-slides, .hero-slide { position: absolute; inset: 0; }
+.hero-slide {
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.6s ease;
+  transform: scale(1.05);
+}
+.hero-slide.active { opacity: 1; animation: kenburns 9s ease-out forwards; }
+@keyframes kenburns { from { transform: scale(1.05); } to { transform: scale(1.18); } }
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(100deg, rgba(20,17,15,.9) 20%, rgba(20,17,15,.35) 100%);
+}
+.hero-content { position: relative; z-index: 2; color: #fff; }
+.hero-tag {
+  display: inline-block; color: var(--gold); letter-spacing: 4px;
+  font-size: .8rem; text-transform: uppercase; margin-bottom: 18px;
+  border-left: 3px solid var(--gold); padding-left: 14px;
+}
+.hero h1 { color: #fff; font-size: clamp(2.4rem, 6vw, 4.8rem); font-weight: 700; }
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero p.lead { color: #d9d0c3; max-width: 540px; margin: 22px 0 34px; font-size: 1.05rem; }
+.hero-card {
+  position: absolute; z-index: 2; right: 6%; bottom: 12%;
+  background: rgba(255,255,255,.1); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius);
+  padding: 22px 28px; color: #fff; animation: floaty 4s ease-in-out infinite;
+}
+.hero-card h3 { color: var(--gold); font-size: 2.2rem; margin: 0; }
+.hero-card small { color: #ddd; letter-spacing: 1px; }
+.scroll-down {
+  position: absolute; z-index: 2; bottom: 28px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 44px; border: 2px solid #fff; border-radius: 20px;
+}
+.scroll-down::after {
+  content: ''; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px;
+  background: var(--gold); border-radius: 4px; transform: translateX(-50%);
+  animation: scrolldot 1.6s infinite;
+}
+@keyframes scrolldot { 0% { opacity: 1; top: 8px; } 100% { opacity: 0; top: 24px; } }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+/* Inner page banner */
+.page-banner {
+  height: 50vh; min-height: 340px; padding: 0; display: flex; align-items: center;
+  justify-content: center; text-align: center; position: relative;
+  background-size: cover; background-position: center; background-attachment: fixed;
+}
+.page-banner::before { content: ''; position: absolute; inset: 0; background: rgba(20,17,15,.72); }
+.page-banner .inner { position: relative; z-index: 1; padding-top: 60px; }
+.page-banner h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.8rem); }
+.page-banner .crumb { color: var(--gold); letter-spacing: 2px; font-size: .85rem; }
+.page-banner .crumb a { color: #fff; }
+
+/* ---------- 6. COMMON ---------- */
+.marquee { background: var(--gold); padding: 16px 0; overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-block; animation: marquee 28s linear infinite; }
+.marquee-track span {
+  font-family: var(--font-head); font-size: 1.3rem; color: var(--ink);
+  margin: 0 28px; font-style: italic;
+}
+.marquee-track span i { color: var(--terra); margin-left: 56px; font-style: normal; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.sec-tag { color: var(--terra); letter-spacing: 4px; font-size: .78rem; text-transform: uppercase; font-weight: 600; }
+.sec-title { font-size: clamp(1.9rem, 4vw, 3rem); margin: 10px 0 18px; }
+.sec-title em { color: var(--terra); }
+.sec-line { width: 70px; height: 3px; background: var(--gold); margin-bottom: 24px; }
+.text-center .sec-line { margin-left: auto; margin-right: auto; }
+
+.about-imgs { position: relative; padding: 0 40px 60px 0; }
+.about-imgs .big { border-radius: var(--radius); width: 100%; height: 480px; object-fit: cover; box-shadow: var(--shadow); }
+.about-imgs .small {
+  position: absolute; right: 0; bottom: 0; width: 55%; height: 220px; object-fit: cover;
+  border-radius: var(--radius); border: 8px solid var(--cream); box-shadow: var(--shadow);
+}
+.exp-badge {
+  position: absolute; left: -10px; top: 40px; background: var(--ink); color: #fff;
+  border-radius: var(--radius); padding: 18px 24px; text-align: center; box-shadow: var(--shadow);
+  animation: floaty 4s ease-in-out infinite;
+}
+.exp-badge b { font-family: var(--font-head); font-size: 2.4rem; color: var(--gold); display: block; line-height: 1; }
+.check-list { list-style: none; padding: 0; }
+.check-list li { padding: 6px 0 6px 32px; position: relative; }
+.check-list li::before {
+  content: '\F26E'; font-family: 'bootstrap-icons'; position: absolute; left: 0; top: 6px; color: var(--terra);
+}
+
+/* Stats */
+.stats { background: var(--ink); padding: 70px 0; }
+.stat-box { text-align: center; color: #cfc6b8; padding: 20px; }
+.stat-box h2 { color: var(--gold); font-size: 3.2rem; margin-bottom: 4px; }
+.stat-box i { font-size: 2rem; color: var(--terra); }
+
+/* ---------- 7. SERVICES ---------- */
+.service-card {
+  background: #fff; border-radius: var(--radius); padding: 38px 30px; height: 100%;
+  border: 1px solid var(--sand); position: relative; overflow: hidden; transition: .4s;
+}
+.service-card::before {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 0;
+  background: var(--ink); transition: .5s; z-index: 0;
+}
+.service-card:hover::before { height: 100%; }
+.service-card > * { position: relative; z-index: 1; transition: .4s; }
+.service-card .icon {
+  width: 68px; height: 68px; border-radius: 50%; background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: var(--terra); margin-bottom: 22px;
+}
+.service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+.service-card:hover h4, .service-card:hover p { color: #fff; }
+.service-card:hover .icon { background: var(--gold); color: var(--ink); }
+.service-card h4 { font-size: 1.3rem; }
+.service-card .more { color: var(--terra); font-weight: 600; font-size: .88rem; }
+.service-card:hover .more { color: var(--gold); }
+
+.pillar-tabs .nav-link {
+  color: var(--ink); border-radius: 50px; padding: 10px 26px; margin: 0 6px 10px; border: 1px solid var(--sand); background: #fff;
+}
+.pillar-tabs .nav-link.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+.pillar-img { border-radius: var(--radius); height: 380px; width: 100%; object-fit: cover; box-shadow: var(--shadow); }
+
+.icon-box { text-align: center; padding: 30px 20px; }
+.icon-box i { font-size: 2.4rem; color: var(--gold); display: inline-block; transition: .4s; }
+.icon-box:hover i { transform: rotateY(360deg) scale(1.15); }
+.dark-sec { background: var(--ink); }
+.dark-sec h4, .dark-sec .sec-title { color: #fff; }
+.dark-sec p { color: #b9afa1; }
+
+/* ---------- 8. PROJECTS ---------- */
+.filter-btns .btn-f {
+  background: transparent; border: 1px solid var(--ink); color: var(--ink);
+  padding: 8px 24px; border-radius: 50px; margin: 4px; font-size: .88rem; transition: .3s;
+}
+.filter-btns .btn-f.active, .filter-btns .btn-f:hover { background: var(--ink); color: var(--gold); }
+.project-item { transition: .5s; }
+.project-item.hide { display: none; }
+.project-card { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; height: 320px; }
+.project-card img { width: 100%; height: 100%; object-fit: cover; transition: 1s; }
+.project-card:hover img { transform: scale(1.15) rotate(1deg); }
+.project-card .overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 26px; color: #fff; background: linear-gradient(to top, rgba(20,17,15,.92), transparent 60%);
+  transform: translateY(35%); transition: .5s;
+}
+.project-card:hover .overlay { transform: translateY(0); }
+.project-card .overlay h5 { color: #fff; margin: 0; }
+.project-card .overlay small { color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+.project-card .overlay p { margin: 8px 0 0; font-size: .85rem; opacity: 0; transition: .5s; }
+.project-card:hover .overlay p { opacity: 1; }
+
+/* ---------- 9. PROCESS ---------- */
+.process-wrap { position: relative; }
+.process-wrap::before {
+  content: ''; position: absolute; top: 44px; left: 10%; right: 10%;
+  border-top: 2px dashed var(--gold); z-index: 0;
+}
+.step { text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+.step .num {
+  width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 20px;
+  background: var(--ink); color: var(--gold); border: 4px solid var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; transition: .4s; box-shadow: var(--shadow);
+}
+.step:hover .num { background: var(--gold); color: var(--ink); transform: scale(1.12) rotate(10deg); }
+.step h5 { font-size: 1.1rem; }
+.step p { font-size: .85rem; color: var(--muted); }
+
+/* ---------- 10. CALCULATOR ---------- */
+.calc-section { background: var(--ink); }
+.calc-box {
+  background: var(--ink-soft); border: 1px solid #3a322c; border-radius: var(--radius);
+  padding: 40px; color: #ddd;
+}
+.calc-box label { color: var(--gold); font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.calc-box .form-select {
+  background-color: #14110f; color: #fff; border: 1px solid #4a4038; padding: 12px;
+}
+.form-range::-webkit-slider-thumb { background: var(--gold); }
+.form-range::-moz-range-thumb { background: var(--gold); }
+.calc-result {
+  background: linear-gradient(135deg, var(--gold), #e3c58f); border-radius: var(--radius);
+  padding: 34px; color: var(--ink); text-align: center; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.calc-result h2 { font-size: 2.3rem; }
+.calc-result small { color: #4a3b22; }
+
+/* ---------- 11. TESTIMONIALS ---------- */
+.testi-card {
+  background: #fff; border-radius: var(--radius); padding: 46px 40px;
+  max-width: 760px; margin: 0 auto; text-align: center; box-shadow: var(--shadow); position: relative;
+}
+.testi-card .quote { font-size: 3.4rem; color: var(--gold); line-height: .5; font-family: var(--font-head); }
+.testi-card p { font-size: 1.05rem; font-style: italic; }
+.testi-card .who { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; }
+.testi-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.carousel-indicators [data-bs-target] { background-color: var(--terra); width: 10px; height: 10px; border-radius: 50%; }
+.stars { color: var(--gold); }
+
+/* ---------- 12. FORMS & CTA ---------- */
+.cta {
+  background: linear-gradient(rgba(20,17,15,.85), rgba(20,17,15,.85)),
+              url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=70') center/cover fixed;
+  color: #fff;
+}
+.cta h2 { color: #fff; }
+.form-card { background: #fff; border-radius: var(--radius); padding: 38px; box-shadow: var(--shadow); }
+.form-card .form-control, .form-card .form-select {
+  border: 1px solid var(--sand); padding: 13px 16px; border-radius: 10px; background: #fcfaf6;
+}
+.form-card .form-control:focus, .form-card .form-select:focus {
+  border-color: var(--gold); box-shadow: 0 0 0 .2rem rgba(200,164,106,.25);
+}
+.info-card {
+  background: var(--ink); color: #cfc6b8; border-radius: var(--radius); padding: 38px; height: 100%;
+}
+.info-card h4 { color: #fff; }
+.info-item { display: flex; gap: 16px; margin-bottom: 24px; }
+.info-item i {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; background: rgba(200,164,106,.15);
+  color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.info-item a { color: #cfc6b8; }
+.info-item a:hover { color: var(--gold); }
+.map-box iframe { width: 100%; height: 380px; border: 0; border-radius: var(--radius); filter: grayscale(.4); }
+
+/* About page extras */
+.team-card { text-align: center; }
+.team-card .photo { position: relative; border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.team-card img { width: 100%; height: 340px; object-fit: cover; transition: .6s; }
+.team-card:hover img { transform: scale(1.08); }
+.team-card .social {
+  position: absolute; left: 0; right: 0; bottom: -60px; display: flex; justify-content: center; gap: 10px; transition: .4s;
+}
+.team-card:hover .social { bottom: 16px; }
+.team-card .social a {
+  width: 38px; height: 38px; background: var(--gold); color: var(--ink); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.timeline { position: relative; padding-left: 30px; border-left: 2px solid var(--gold); }
+.timeline .t-item { position: relative; margin-bottom: 34px; }
+.timeline .t-item::before {
+  content: ''; position: absolute; left: -39px; top: 6px; width: 16px; height: 16px;
+  background: var(--terra); border-radius: 50%; border: 3px solid var(--cream);
+}
+.timeline .year { color: var(--terra); font-weight: 700; font-family: var(--font-head); font-size: 1.2rem; }
+
+/* FAQ */
+.accordion-button:not(.collapsed) { background: var(--ink); color: var(--gold); box-shadow: none; }
+.accordion-button:focus { box-shadow: none; }
+.accordion-item { border-radius: 12px !important; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--sand); }
+
+/* ---------- 13. FOOTER ---------- */
+footer { background: #0d0b0a; color: #a89f92; padding: 80px 0 0; }
+footer h5 { color: #fff; font-size: 1.15rem; margin-bottom: 22px; }
+footer a { color: #a89f92; display: inline-block; }
+footer a:hover { color: var(--gold); transform: translateX(5px); }
+footer ul { list-style: none; padding: 0; }
+footer ul li { margin-bottom: 10px; }
+.social-row a {
+  width: 40px; height: 40px; border: 1px solid #3a322c; border-radius: 50%; margin-right: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.social-row a:hover { background: var(--gold); color: var(--ink); transform: translateY(-4px); border-color: var(--gold); }
+.copyright { border-top: 1px solid #231e1a; margin-top: 50px; padding: 22px 0; font-size: .85rem; }
+
+/* Floating buttons */
+.float-wa {
+  position: fixed; left: 22px; bottom: 22px; z-index: 999; width: 54px; height: 54px;
+  background: #25d366; color: #fff; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 1.7rem; box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  animation: pulse 2s infinite;
+}
+.float-wa:hover { color: #fff; transform: scale(1.1); }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,.6); }
+  70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+#toTop {
+  position: fixed; right: 22px; bottom: 22px; z-index: 999; width: 46px; height: 46px;
+  background: var(--gold); color: var(--ink); border: 0; border-radius: 50%; font-size: 1.2rem;
+  opacity: 0; visibility: hidden; transition: .4s;
+}
+#toTop.show { opacity: 1; visibility: visible; }
+
+/* ---------- 14. SCROLL REVEAL ANIMATIONS ---------- */
+[data-reveal] { opacity: 0; transition: opacity .9s ease, transform .9s ease; }
+[data-reveal="up"]    { transform: translateY(50px); }
+[data-reveal="left"]  { transform: translateX(-60px); }
+[data-reveal="right"] { transform: translateX(60px); }
+[data-reveal="zoom"]  { transform: scale(.88); }
+[data-reveal].revealed { opacity: 1; transform: none; }
+
+/* Hero text line reveal */
+.line-mask { display: block; overflow: hidden; }
+.line-mask span { display: block; transform: translateY(110%); animation: lineUp 1s cubic-bezier(.2,.8,.2,1) forwards; }
+.line-mask:nth-child(2) span { animation-delay: .15s; }
+.line-mask:nth-child(3) span { animation-delay: .3s; }
+@keyframes lineUp { to { transform: translateY(0); } }
+
+/* ---------- 15. RESPONSIVE ---------- */
+@media (max-width: 991px) {
+  section { padding: 70px 0; }
+  .main-nav { background: rgba(20,17,15,.96); padding: 12px 0; }
+  .navbar-collapse { padding: 16px 0; }
+  .hero-card { display: none; }
+  .process-wrap::before { display: none; }
+  .step { margin-bottom: 30px; }
+  .about-imgs { padding: 0 0 50px 0; }
+  .about-imgs .big { height: 360px; }
+  .page-banner { background-attachment: scroll; }
+  .cta { background-attachment: scroll; }
+}
+@media (max-width: 575px) {
+  .hero { min-height: 600px; }
+  .calc-box, .form-card, .info-card { padding: 26px 20px; }
+  .testi-card { padding: 34px 22px; }
+  .stat-box h2 { font-size: 2.4rem; }
+  .exp-badge { left: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader-logo">NIRMAAN</div>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg main-nav">
+  <div class="container">
+    <a class="navbar-brand brand" href="index.html">NIRMAAN<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn btn-gold" href="contact.html">Free Consultation</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=70')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=70')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=70')"></div>
+  </div>
+  <div class="container hero-content">
+    <span class="hero-tag">Build &bull; Design &bull; Furnish</span>
+    <h1>
+      <span class="line-mask"><span>We Build Homes</span></span>
+      <span class="line-mask"><span>You Will <em>Love</em></span></span>
+      <span class="line-mask"><span>Living In.</span></span>
+    </h1>
+    <p class="lead">Construction, architecture and interiors - planned, built and styled by one team. No running around, no hidden charges.</p>
+    <a href="contact.html" class="btn btn-gold me-2">Book Free Consultation</a>
+    <a href="projects.html" class="btn btn-outline-light-x">View Our Work</a>
+  </div>
+  <div class="hero-card">
+    <h3>10 Year</h3><small>WARRANTY ON ALL WORK</small>
+  </div>
+  <div class="scroll-down"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Construction <i>&#9670;</i></span><span>Architecture <i>&#9670;</i></span><span>Living Room <i>&#9670;</i></span>
+    <span>Modular Kitchen <i>&#9670;</i></span><span>Wardrobes <i>&#9670;</i></span><span>False Ceiling <i>&#9670;</i></span>
+    <span>Commercial Spaces <i>&#9670;</i></span><span>Landscaping <i>&#9670;</i></span>
+    <span>Construction <i>&#9670;</i></span><span>Architecture <i>&#9670;</i></span><span>Living Room <i>&#9670;</i></span>
+    <span>Modular Kitchen <i>&#9670;</i></span><span>Wardrobes <i>&#9670;</i></span><span>False Ceiling <i>&#9670;</i></span>
+    <span>Commercial Spaces <i>&#9670;</i></span><span>Landscaping <i>&#9670;</i></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-reveal="left">
+        <div class="about-imgs">
+          <img class="big" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=70" alt="Modern villa">
+          <img class="small" src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=70" alt="Kitchen">
+          <div class="exp-badge"><b>12+</b><small>Years of Trust</small></div>
+        </div>
+      </div>
+      <div class="col-lg-6" data-reveal="right">
+        <span class="sec-tag">About Nirmaan</span>
+        <h2 class="sec-title">One Team For Your <em>Entire</em> Dream Home</h2>
+        <div class="sec-line"></div>
+        <p>Most people hire one contractor, one architect and one interior designer - and then spend months managing them. At Nirmaan Studio all three work together, from the first sketch on paper to the day you move in.</p>
+        <ul class="check-list mb-4">
+          <li>In-house architects, engineers and designers</li>
+          <li>Fixed quotation - what we promise is what you pay</li>
+          <li>Delivery in 45 days for interior projects</li>
+          <li>Easy EMI and a 10 year warranty on modular work</li>
+        </ul>
+        <a href="about.html" class="btn btn-gold">Know More About Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-md-3 stat-box" data-reveal="up"><i class="bi bi-calendar-check"></i><h2><span class="counter" data-target="12">0</span>+</h2>Years Experience</div>
+      <div class="col-6 col-md-3 stat-box" data-reveal="up" data-delay="150"><i class="bi bi-buildings"></i><h2><span class="counter" data-target="850">0</span>+</h2>Projects Done</div>
+      <div class="col-6 col-md-3 stat-box" data-reveal="up" data-delay="300"><i class="bi bi-emoji-smile"></i><h2><span class="counter" data-target="1200">0</span>+</h2>Happy Families</div>
+      <div class="col-6 col-md-3 stat-box" data-reveal="up" data-delay="450"><i class="bi bi-trophy"></i><h2><span class="counter" data-target="15">0</span></h2>Awards Won</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES (3 pillars) -->
+<section>
+  <div class="container">
+    <div class="text-center mb-5" data-reveal="up">
+      <span class="sec-tag">What We Do</span>
+      <h2 class="sec-title">From Foundation to <em>Finishing</em></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" data-reveal="up">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-bricks"></i></div>
+          <h4>Construction</h4>
+          <p>Homes, villas, apartments and commercial buildings built with quality material and strict site supervision.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-reveal="up" data-delay="150">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-rulers"></i></div>
+          <h4>Architecture</h4>
+          <p>Smart floor plans, 3D elevations, Vastu-friendly layouts and approved drawings before work begins.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-reveal="up" data-delay="300">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-house-heart"></i></div>
+          <h4>Residential Interiors</h4>
+          <p>Living rooms, bedrooms, kitchens, wardrobes and TV units made to match your style and budget.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-reveal="up">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-shop"></i></div>
+          <h4>Commercial Interiors</h4>
+          <p>Offices, showrooms, clinics and retail stores that look professional and work smartly for your business.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-reveal="up" data-delay="150">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-cup-hot"></i></div>
+          <h4>Hospitality Design</h4>
+          <p>Hotels, restaurants and cafes designed for a memorable guest experience.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4" data-reveal="up" data-delay="300">
+        <div class="service-card">
+          <div class="icon"><i class="bi bi-lamp"></i></div>
+          <h4>Furniture &amp; Decor</h4>
+          <p>Custom furniture, lighting, curtains and decor products delivered and installed by our team.</p>
+          <a href="services.html" class="more">Explore <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="background:#fff">
+  <div class="container">
+    <div class="text-center mb-5" data-reveal="up">
+      <span class="sec-tag">How It Works</span>
+      <h2 class="sec-title">Simple <em>5 Step</em> Process</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="row process-wrap">
+      <div class="col-6 col-lg step" data-reveal="up"><div class="num"><i class="bi bi-chat-dots"></i></div><h5>1. Meet Us</h5><p>Free consultation online or at your site.</p></div>
+      <div class="col-6 col-lg step" data-reveal="up" data-delay="150"><div class="num"><i class="bi bi-pencil-square"></i></div><h5>2. Design</h5><p>Get plans and live 3D views.</p></div>
+      <div class="col-6 col-lg step" data-reveal="up" data-delay="300"><div class="num"><i class="bi bi-cash-coin"></i></div><h5>3. Quote &amp; Book</h5><p>Transparent pricing, 5% to book.</p></div>
+      <div class="col-6 col-lg step" data-reveal="up" data-delay="450"><div class="num"><i class="bi bi-hammer"></i></div><h5>4. Execution</h5><p>Work starts, you get weekly updates.</p></div>
+      <div class="col-12 col-lg step" data-reveal="up" data-delay="600"><div class="num"><i class="bi bi-key"></i></div><h5>5. Move In</h5><p>Final handover and enjoy your home.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <div class="container">
+    <div class="text-center mb-4" data-reveal="up">
+      <span class="sec-tag">Our Portfolio</span>
+      <h2 class="sec-title">Spaces We Are <em>Proud</em> Of</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="text-center filter-btns mb-4" data-reveal="up">
+      <button class="btn-f active" data-filter="all">All</button>
+      <button class="btn-f" data-filter="residential">Residential</button>
+      <button class="btn-f" data-filter="commercial">Commercial</button>
+      <button class="btn-f" data-filter="hospitality">Hospitality</button>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 project-item" data-type="residential" data-reveal="zoom"><div class="project-card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Residential</small><h5>Ocean Living Room</h5><p>Calm blue tones with warm wooden finish.</p></div></div></div>
+      <div class="col-md-6 col-lg-4 project-item" data-type="residential" data-reveal="zoom" data-delay="150"><div class="project-card"><img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Residential</small><h5>Modern Modular Kitchen</h5><p>Handle-less cabinets with quartz counter.</p></div></div></div>
+      <div class="col-md-6 col-lg-4 project-item" data-type="commercial" data-reveal="zoom" data-delay="300"><div class="project-card"><img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Commercial</small><h5>Creative Office Hub</h5><p>Open workspace with acoustic ceiling.</p></div></div></div>
+      <div class="col-md-6 col-lg-4 project-item" data-type="residential" data-reveal="zoom"><div class="project-card"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Residential</small><h5>Classic Master Bedroom</h5><p>Padded headboard and ambient lighting.</p></div></div></div>
+      <div class="col-md-6 col-lg-4 project-item" data-type="hospitality" data-reveal="zoom" data-delay="150"><div class="project-card"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Hospitality</small><h5>Boutique Hotel Lobby</h5><p>Luxury welcome with brass details.</p></div></div></div>
+      <div class="col-md-6 col-lg-4 project-item" data-type="commercial" data-reveal="zoom" data-delay="300"><div class="project-card"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=70" alt=""><div class="overlay"><small>Commercial</small><h5>Corporate Boardroom</h5><p>Premium finish for big meetings.</p></div></div></div>
+    </div>
+    <div class="text-center mt-5"><a href="projects.html" class="btn btn-gold">See All Projects</a></div>
+  </div>
+</section>
+
+<!-- PRICE CALCULATOR -->
+<section class="calc-section">
+  <div class="container">
+    <div class="text-center mb-5" data-reveal="up">
+      <span class="sec-tag" style="color:var(--gold)">Instant Estimate</span>
+      <h2 class="sec-title" style="color:#fff">Calculate Your <em style="color:var(--gold)">Approx.</em> Cost</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="calc-box" data-reveal="up">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="mb-4">
+            <label>Area: <b id="areaVal" class="text-white">1200</b> sq.ft</label>
+            <input type="range" class="form-range" id="calcArea" min="300" max="6000" step="50" value="1200">
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label>Work Type</label>
+              <select id="calcType" class="form-select">
+                <option value="interior">Interior Only</option>
+                <option value="construction">Construction Only</option>
+                <option value="both">Construction + Interior</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label>Package</label>
+              <select id="calcPack" class="form-select">
+                <option value="basic">Basic</option>
+                <option value="premium">Premium</option>
+                <option value="luxury">Luxury</option>
+              </select>
+            </div>
+          </div>
+          <p class="mt-4 mb-0 small text-secondary">* This is only an approximate estimate. Final price depends on design and material.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="calc-result">
+            <small>ESTIMATED COST</small>
+            <h2 id="calcOut">₹ 0</h2>
+            <small id="calcRange"></small>
+            <a href="contact.html" class="btn btn-dark rounded-pill mt-4 mx-auto px-4">Get Exact Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section>
+  <div class="container">
+    <div class="text-center mb-4" data-reveal="up">
+      <span class="sec-tag">Why Nirmaan</span>
+      <h2 class="sec-title">Reasons To <em>Choose</em> Us</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-3 icon-box" data-reveal="up"><i class="bi bi-truck"></i><h5 class="mt-3">45 Days Delivery</h5><p class="small">On-time or we compensate.</p></div>
+      <div class="col-6 col-lg-3 icon-box" data-reveal="up" data-delay="150"><i class="bi bi-credit-card"></i><h5 class="mt-3">Easy EMI</h5><p class="small">Pay in small monthly parts.</p></div>
+      <div class="col-6 col-lg-3 icon-box" data-reveal="up" data-delay="300"><i class="bi bi-shield-check"></i><h5 class="mt-3">10 Year Warranty</h5><p class="small">On all modular products.</p></div>
+      <div class="col-6 col-lg-3 icon-box" data-reveal="up" data-delay="450"><i class="bi bi-eye"></i><h5 class="mt-3">No Hidden Charges</h5><p class="small">100% transparent billing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--sand)">
+  <div class="container">
+    <div class="text-center mb-5" data-reveal="up">
+      <span class="sec-tag">Testimonials</span>
+      <h2 class="sec-title">Our Clients Do The <em>Talking</em></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div id="testi" class="carousel slide" data-bs-ride="carousel" data-reveal="up">
+      <div class="carousel-inner pb-5">
+        <div class="carousel-item active"><div class="testi-card"><div class="quote">&ldquo;</div><div class="stars mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p>The quality of work and finishing was excellent. Every guest in our house asks who designed it. Nirmaan delivered on the promised date.</p><div class="who"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=70" alt=""><div class="text-start"><b>Rohit Kumar</b><br><small class="text-muted">Villa Owner</small></div></div></div></div>
+        <div class="carousel-item"><div class="testi-card"><div class="quote">&ldquo;</div><div class="stars mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p>Great value for money. The price quoted in the beginning was the final price. Loved the 3D design they showed before starting.</p><div class="who"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=70" alt=""><div class="text-start"><b>Shweta Singh</b><br><small class="text-muted">Apartment Owner</small></div></div></div></div>
+        <div class="carousel-item"><div class="testi-card"><div class="quote">&ldquo;</div><div class="stars mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div><p>Stress free experience. The team kept us updated every week with photos. Our office was ready exactly when they said.</p><div class="who"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70" alt=""><div class="text-start"><b>Sameer Khan</b><br><small class="text-muted">Business Owner</small></div></div></div></div>
+      </div>
+      <div class="carousel-indicators" style="bottom:-5px">
+        <button type="button" data-bs-target="#testi" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#testi" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#testi" data-bs-slide-to="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + QUICK FORM -->
+<section class="cta">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-reveal="left">
+        <span class="sec-tag" style="color:var(--gold)">Let's Talk</span>
+        <h2 class="sec-title">Ready To Start Your <em style="color:var(--gold)">Dream</em> Project?</h2>
+        <p class="text-light">Share your details and our designer will call you within 24 hours. The first consultation is completely free.</p>
+        <p class="mb-0"><i class="bi bi-telephone-fill text-warning"></i> +91 98765 43210</p>
+      </div>
+      <div class="col-lg-6" data-reveal="right">
+        <div id="formAlert"></div>
+        <form action="backend/insert.php" method="POST" class="form-card">
+  <input type="hidden" name="source" value="home">
+  <div class="row g-3">
+    <div class="col-md-6"><input type="text" name="name" class="form-control" placeholder="Your Name *" required></div>
+    <div class="col-md-6"><input type="tel" name="phone" class="form-control" placeholder="Phone Number *" pattern="[0-9+ ]{10,15}" required></div>
+    <div class="col-md-6"><input type="email" name="email" class="form-control" placeholder="Email Address"></div>
+    <div class="col-md-6">
+      <select name="service" class="form-select" required>
+        <option value="">Select Service *</option>
+        <option>Construction</option>
+        <option>Architecture &amp; Planning</option>
+        <option>Residential Interior</option>
+        <option>Commercial Interior</option>
+        <option>Modular Kitchen</option>
+        <option>Turnkey (Build + Interior)</option>
+      </select>
+    </div>
+    <div class="col-12"><textarea name="message" rows="4" class="form-control" placeholder="Tell us about your project..."></textarea></div>
+    <div class="col-12"><button type="submit" class="btn btn-gold w-100">Send Enquiry <i class="bi bi-send ms-1"></i></button></div>
+  </div>
+</form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <a class="brand" href="index.html">NIRMAAN<span>.</span></a>
+        <p class="mt-3">From the first brick to the last cushion - we plan, build and furnish your space under one roof. Honest pricing, on-time delivery and a 10 year warranty.</p>
+        <div class="social-row mt-4">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h5>Our Services</h5>
+        <ul>
+          <li><a href="services.html">Construction</a></li>
+          <li><a href="services.html">Architecture</a></li>
+          <li><a href="services.html">Residential Interiors</a></li>
+          <li><a href="services.html">Commercial Interiors</a></li>
+          <li><a href="services.html">Modular Kitchen</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact</h5>
+        <ul>
+          <li><i class="bi bi-geo-alt text-warning"></i> 123, Design Plaza, Your City, India</li>
+          <li><i class="bi bi-telephone text-warning"></i> <a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><i class="bi bi-envelope text-warning"></i> <a href="mailto:info@nirmaanstudio.in">info@nirmaanstudio.in</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright text-center">&copy; 2026 Nirmaan Studio. All rights reserved.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919876543210?text=Hi" class="float-wa" target="_blank"><i class="bi bi-whatsapp"></i></a>
+<button id="toTop"><i class="bi bi-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Internal JavaScript (same as assets/js/main.js) -->
+<script>
+/* =====================================================
+   NIRMAAN STUDIO - Main JavaScript
+   1 Preloader | 2 Navbar | 3 Hero slider | 4 Scroll reveal
+   5 Counters | 6 Project filter | 7 Calculator | 8 Form status
+   9 Back to top | 10 Image fallback | 11 Hero mouse parallax
+   ===================================================== */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ---------- 1. PRELOADER ---------- */
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', function () {
+    setTimeout(function () { if (preloader) preloader.classList.add('hide'); }, 1500);
+  });
+  // safety: hide even if some image is slow
+  setTimeout(function () { if (preloader) preloader.classList.add('hide'); }, 3500);
+
+  /* ---------- 2. NAVBAR (change style on scroll) ---------- */
+  const nav = document.querySelector('.main-nav');
+  function onScroll() {
+    if (window.scrollY > 60) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    const topBtn = document.getElementById('toTop');
+    if (topBtn) topBtn.classList.toggle('show', window.scrollY > 500);
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  /* ---------- 3. HERO SLIDER (auto change background) ---------- */
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length > 1) {
+    let current = 0;
+    setInterval(function () {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 6000);
+  }
+
+  /* ---------- 4. SCROLL REVEAL ---------- */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        const delay = entry.target.getAttribute('data-delay') || 0;
+        setTimeout(function () { entry.target.classList.add('revealed'); }, delay);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+  /* ---------- 5. NUMBER COUNTERS ---------- */
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.getAttribute('data-target');
+      const step = target / 90;
+      let value = 0;
+      const timer = setInterval(function () {
+        value += step;
+        if (value >= target) { value = target; clearInterval(timer); }
+        el.textContent = Math.floor(value);
+      }, 20);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function (c) { counterObserver.observe(c); });
+
+  /* ---------- 6. PROJECT FILTER ---------- */
+  const filterBtns = document.querySelectorAll('.btn-f');
+  const items = document.querySelectorAll('.project-item');
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const type = btn.getAttribute('data-filter');
+      items.forEach(function (item) {
+        if (type === 'all' || item.getAttribute('data-type') === type) item.classList.remove('hide');
+        else item.classList.add('hide');
+      });
+    });
+  });
+
+  /* Project image popup (modal) on projects page */
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  document.querySelectorAll('.project-card[data-bs-toggle="modal"]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      modalImg.src = card.querySelector('img').src;
+      modalTitle.textContent = card.getAttribute('data-title');
+    });
+  });
+
+  /* ---------- 7. PRICE CALCULATOR ---------- */
+  const area = document.getElementById('calcArea');
+  if (area) {
+    const areaVal = document.getElementById('areaVal');
+    const type = document.getElementById('calcType');
+    const pack = document.getElementById('calcPack');
+    const out = document.getElementById('calcOut');
+    const outRange = document.getElementById('calcRange');
+
+    // Approx rate per sq.ft (change these numbers as you like)
+    const rates = { interior: 1400, construction: 1900, both: 3000 };
+    const multi = { basic: 1, premium: 1.35, luxury: 1.8 };
+
+    function formatINR(n) { return '₹ ' + Math.round(n).toLocaleString('en-IN'); }
+
+    function calculate() {
+      areaVal.textContent = area.value;
+      const total = area.value * rates[type.value] * multi[pack.value];
+      out.textContent = formatINR(total);
+      outRange.textContent = formatINR(total * 0.9) + '  -  ' + formatINR(total * 1.1);
+    }
+    [area, type, pack].forEach(function (el) { el.addEventListener('input', calculate); });
+    calculate();
+  }
+
+  /* ---------- 8. FORM STATUS MESSAGE (from backend redirect) ---------- */
+  const params = new URLSearchParams(window.location.search);
+  const alertBox = document.getElementById('formAlert');
+  if (alertBox && params.get('status')) {
+    if (params.get('status') === 'success') {
+      alertBox.className = 'alert alert-success';
+      alertBox.textContent = 'Thank you! Your enquiry has been sent. We will call you soon.';
+    } else {
+      alertBox.className = 'alert alert-danger';
+      alertBox.textContent = 'Sorry, something went wrong. Please check the form and try again.';
+    }
+    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ---------- 9. BACK TO TOP ---------- */
+  const toTop = document.getElementById('toTop');
+  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* ---------- 10. IMAGE FALLBACK ---------- */
+  document.querySelectorAll('img').forEach(function (img) {
+    img.addEventListener('error', function () { img.classList.add('img-fallback'); });
+  });
+
+  /* ---------- 11. HERO MOUSE PARALLAX ---------- */
+  const heroCard = document.querySelector('.hero-card');
+  const hero = document.querySelector('.hero');
+  if (hero && heroCard && window.innerWidth > 991) {
+    hero.addEventListener('mousemove', function (e) {
+      const x = (window.innerWidth / 2 - e.clientX) / 60;
+      const y = (window.innerHeight / 2 - e.clientY) / 60;
+      heroCard.style.marginRight = x + 'px';
+      heroCard.style.marginBottom = y + 'px';
+    });
+  }
+});
+
+</script>
+</body>
+</html>
