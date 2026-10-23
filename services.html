@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services | Nirmaan Studio</title>
+  <meta name="description" content="Construction, architecture and interior design services by Nirmaan Studio.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Services | Nirmaan Studio">
+  <meta property="og:description" content="Construction, architecture and interior design services by Nirmaan Studio.">
+  <meta name="theme-color" content="#14110f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314110f'/%3E%3Ctext x='32' y='45' font-size='38' text-anchor='middle' fill='%23c8a46a' font-family='Georgia,serif' font-weight='bold'%3EN%3C/text%3E%3C/svg%3E">
+  <noscript><style>[data-reveal]{opacity:1!important;transform:none!important}#preloader{display:none!important}.line-mask span{transform:none!important}</style></noscript>
+  <!-- Bootstrap 5 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Our own CSS -->
+  <!-- Internal CSS (same as assets/css/style.css) -->
+<style>
+/* =====================================================
+   NIRMAAN STUDIO - Main Stylesheet
+   Sections: 1 Variables | 2 Base | 3 Preloader | 4 Navbar
+   5 Hero | 6 Common | 7 Services | 8 Projects | 9 Process
+   10 Calculator | 11 Testimonials | 12 Forms | 13 Footer
+   14 Animations | 15 Responsive
+   ===================================================== */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  --ink: #14110f;        /* dark background */
+  --ink-soft: #1f1a17;   /* slightly lighter dark */
+  --cream: #f6f1e9;      /* light background */
+  --sand: #e9dfd0;       /* border / soft sections */
+  --gold: #c8a46a;       /* main accent */
+  --terra: #9a4228;      /* second accent */
+  --text: #3b3530;       /* body text */
+  --muted: #6b6259;      /* muted text */
+  --radius: 18px;
+  --shadow: 0 20px 50px rgba(20, 17, 15, .12);
+  --font-head: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+/* ---------- 2. BASE ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+  overflow-x: clip;          /* nothing may push the page sideways */
+  line-height: 1.7;
+}
+h1, h2, h3, h4, h5 { font-family: var(--font-head); color: var(--ink); line-height: 1.2; }
+a { text-decoration: none; transition: .3s; }
+img { max-width: 100%; display: block; }
+section { padding: 100px 0; position: relative; }
+::selection { background: var(--gold); color: var(--ink); }
+
+/* Image fallback (if internet image fails to load) */
+img.img-fallback { background: linear-gradient(135deg, #3a2f28, #6b5645); min-height: 200px; }
+
+/* ---------- 3. PRELOADER ---------- */
+#preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--ink);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity .6s, visibility .6s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.loader-logo { font-family: var(--font-head); font-size: 2.4rem; color: var(--gold); letter-spacing: 8px; }
+.loader-bar { width: 180px; height: 3px; background: #333; margin-top: 20px; overflow: hidden; border-radius: 3px; }
+.loader-bar span { display: block; height: 100%; width: 0; background: var(--gold); animation: loadbar 1.4s ease forwards; }
+@keyframes loadbar { to { width: 100%; } }
+
+/* ---------- 4. NAVBAR ---------- */
+.main-nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 22px 0; transition: .4s;
+}
+.main-nav.scrolled {
+  background: rgba(20, 17, 15, .95);
+  backdrop-filter: blur(10px);
+  padding: 12px 0;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, .25);
+}
+.brand { font-family: var(--font-head); font-size: 1.7rem; color: #fff; letter-spacing: 4px; font-weight: 700; }
+.brand span { color: var(--gold); }
+.brand:hover { color: #fff; }
+.main-nav .nav-link {
+  color: #ece4d8 !important; font-size: .9rem; margin: 0 8px;
+  position: relative; padding: 6px 0 !important; letter-spacing: .5px;
+}
+.main-nav .nav-link::after {
+  content: ''; position: absolute; left: 0; bottom: 0;
+  width: 0; height: 2px; background: var(--gold); transition: .3s;
+}
+.main-nav .nav-link:hover::after, .main-nav .nav-link.active::after { width: 100%; }
+.navbar-toggler { border: 1px solid var(--gold); }
+.navbar-toggler-icon { filter: invert(1); }
+.btn-gold {
+  background: var(--gold); color: var(--ink); border: 2px solid var(--gold);
+  padding: 12px 30px; border-radius: 50px; font-weight: 600; font-size: .9rem;
+  position: relative; overflow: hidden; z-index: 1;
+}
+.btn-gold:hover { background: transparent; color: var(--gold); transform: translateY(-3px); }
+.btn-outline-light-x {
+  border: 2px solid rgba(255,255,255,.6); color: #fff;
+  padding: 12px 30px; border-radius: 50px; font-weight: 500; font-size: .9rem;
+}
+.btn-outline-light-x:hover { background: #fff; color: var(--ink); transform: translateY(-3px); }
+
+/* ---------- 5. HERO ---------- */
+.hero { height: 100vh; min-height: 650px; padding: 0; overflow: hidden; display: flex; align-items: center; background: var(--ink); }
+.hero-slides, .hero-slide { position: absolute; inset: 0; }
+.hero-slide {
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.6s ease;
+  transform: scale(1.05);
+}
+.hero-slide.active { opacity: 1; animation: kenburns 9s ease-out forwards; }
+@keyframes kenburns { from { transform: scale(1.05); } to { transform: scale(1.18); } }
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(100deg, rgba(20,17,15,.9) 20%, rgba(20,17,15,.35) 100%);
+}
+.hero-content { position: relative; z-index: 2; color: #fff; }
+.hero-tag {
+  display: inline-block; color: var(--gold); letter-spacing: 4px;
+  font-size: .8rem; text-transform: uppercase; margin-bottom: 18px;
+  border-left: 3px solid var(--gold); padding-left: 14px;
+}
+.hero h1 { color: #fff; font-size: clamp(2.4rem, 6vw, 4.8rem); font-weight: 700; }
+.hero h1 em { color: var(--gold); font-style: italic; }
+.hero p.lead { color: #d9d0c3; max-width: 540px; margin: 22px 0 34px; font-size: 1.05rem; }
+.hero-card {
+  position: absolute; z-index: 2; right: 6%; bottom: 12%;
+  background: rgba(255,255,255,.1); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius);
+  padding: 22px 28px; color: #fff; animation: floaty 4s ease-in-out infinite;
+}
+.hero-card h3 { color: var(--gold); font-size: 2.2rem; margin: 0; }
+.hero-card small { color: #ddd; letter-spacing: 1px; }
+.scroll-down {
+  position: absolute; z-index: 2; bottom: 28px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 44px; border: 2px solid #fff; border-radius: 20px;
+}
+.scroll-down::after {
+  content: ''; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px;
+  background: var(--gold); border-radius: 4px; transform: translateX(-50%);
+  animation: scrolldot 1.6s infinite;
+}
+@keyframes scrolldot { 0% { opacity: 1; top: 8px; } 100% { opacity: 0; top: 24px; } }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+/* Inner page banner */
+.page-banner {
+  height: 50vh; min-height: 340px; padding: 0; display: flex; align-items: center;
+  justify-content: center; text-align: center; position: relative;
+  background-size: cover; background-position: center; background-attachment: fixed;
+}
+.page-banner::before { content: ''; position: absolute; inset: 0; background: rgba(20,17,15,.72); }
+.page-banner .inner { position: relative; z-index: 1; padding-top: 60px; }
+.page-banner h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.8rem); }
+.page-banner .crumb { color: var(--gold); letter-spacing: 2px; font-size: .85rem; }
+.page-banner .crumb a { color: #fff; }
+
+/* ---------- 6. COMMON ---------- */
+.marquee { background: var(--gold); padding: 16px 0; overflow: hidden; white-space: nowrap; }
+.marquee-track { display: inline-block; animation: marquee 28s linear infinite; }
+.marquee-track span {
+  font-family: var(--font-head); font-size: 1.3rem; color: var(--ink);
+  margin: 0 28px; font-style: italic;
+}
+.marquee-track span i { color: var(--terra); margin-left: 56px; font-style: normal; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.sec-tag { color: var(--terra); letter-spacing: 4px; font-size: .78rem; text-transform: uppercase; font-weight: 600; }
+.sec-title { font-size: clamp(1.9rem, 4vw, 3rem); margin: 10px 0 18px; }
+.sec-title em { color: var(--terra); }
+.sec-line { width: 70px; height: 3px; background: var(--gold); margin-bottom: 24px; }
+.text-center .sec-line { margin-left: auto; margin-right: auto; }
+
+.about-imgs { position: relative; padding: 0 40px 60px 0; }
+.about-imgs .big { border-radius: var(--radius); width: 100%; height: 480px; object-fit: cover; box-shadow: var(--shadow); }
+.about-imgs .small {
+  position: absolute; right: 0; bottom: 0; width: 55%; height: 220px; object-fit: cover;
+  border-radius: var(--radius); border: 8px solid var(--cream); box-shadow: var(--shadow);
+}
+.exp-badge {
+  position: absolute; left: -10px; top: 40px; background: var(--ink); color: #fff;
+  border-radius: var(--radius); padding: 18px 24px; text-align: center; box-shadow: var(--shadow);
+  animation: floaty 4s ease-in-out infinite;
+}
+.exp-badge b { font-family: var(--font-head); font-size: 2.4rem; color: var(--gold); display: block; line-height: 1; }
+.check-list { list-style: none; padding: 0; }
+.check-list li { padding: 6px 0 6px 32px; position: relative; }
+.check-list li::before {
+  content: '\F26E'; font-family: 'bootstrap-icons'; position: absolute; left: 0; top: 6px; color: var(--terra);
+}
+
+/* Stats */
+.stats { background: var(--ink); padding: 70px 0; }
+.stat-box { text-align: center; color: #cfc6b8; padding: 20px; }
+.stat-box h2 { color: var(--gold); font-size: 3.2rem; margin-bottom: 4px; }
+.stat-box i { font-size: 2rem; color: var(--terra); }
+
+/* ---------- 7. SERVICES ---------- */
+.service-card {
+  background: #fff; border-radius: var(--radius); padding: 38px 30px; height: 100%;
+  border: 1px solid var(--sand); position: relative; overflow: hidden; transition: .4s;
+}
+.service-card::before {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 0;
+  background: var(--ink); transition: .5s; z-index: 0;
+}
+.service-card:hover::before { height: 100%; }
+.service-card > * { position: relative; z-index: 1; transition: .4s; }
+.service-card .icon {
+  width: 68px; height: 68px; border-radius: 50%; background: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; color: var(--terra); margin-bottom: 22px;
+}
+.service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+.service-card:hover h4, .service-card:hover p { color: #fff; }
+.service-card:hover .icon { background: var(--gold); color: var(--ink); }
+.service-card h4 { font-size: 1.3rem; }
+.service-card .more { color: var(--terra); font-weight: 600; font-size: .88rem; }
+.service-card:hover .more { color: var(--gold); }
+
+.pillar-tabs .nav-link {
+  color: var(--ink); border-radius: 50px; padding: 10px 26px; margin: 0 6px 10px; border: 1px solid var(--sand); background: #fff;
+}
+.pillar-tabs .nav-link.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+.pillar-img { border-radius: var(--radius); height: 380px; width: 100%; object-fit: cover; box-shadow: var(--shadow); }
+
+.icon-box { text-align: center; padding: 30px 20px; }
+.icon-box i { font-size: 2.4rem; color: var(--gold); display: inline-block; transition: .4s; }
+.icon-box:hover i { transform: rotateY(360deg) scale(1.15); }
+.dark-sec { background: var(--ink); }
+.dark-sec h4, .dark-sec .sec-title { color: #fff; }
+.dark-sec p { color: #b9afa1; }
+
+/* ---------- 8. PROJECTS ---------- */
+.filter-btns .btn-f {
+  background: transparent; border: 1px solid var(--ink); color: var(--ink);
+  padding: 8px 24px; border-radius: 50px; margin: 4px; font-size: .88rem; transition: .3s;
+}
+.filter-btns .btn-f.active, .filter-btns .btn-f:hover { background: var(--ink); color: var(--gold); }
+.project-item { transition: .5s; }
+.project-item.hide { display: none; }
+.project-card { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; height: 320px; }
+.project-card img { width: 100%; height: 100%; object-fit: cover; transition: 1s; }
+.project-card:hover img { transform: scale(1.15) rotate(1deg); }
+.project-card .overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 26px; color: #fff; background: linear-gradient(to top, rgba(20,17,15,.92), transparent 60%);
+  transform: translateY(35%); transition: .5s;
+}
+.project-card:hover .overlay { transform: translateY(0); }
+.project-card .overlay h5 { color: #fff; margin: 0; }
+.project-card .overlay small { color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+.project-card .overlay p { margin: 8px 0 0; font-size: .85rem; opacity: 0; transition: .5s; }
+.project-card:hover .overlay p { opacity: 1; }
+
+/* ---------- 9. PROCESS ---------- */
+.process-wrap { position: relative; }
+.process-wrap::before {
+  content: ''; position: absolute; top: 44px; left: 10%; right: 10%;
+  border-top: 2px dashed var(--gold); z-index: 0;
+}
+.step { text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+.step .num {
+  width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 20px;
+  background: var(--ink); color: var(--gold); border: 4px solid var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; transition: .4s; box-shadow: var(--shadow);
+}
+.step:hover .num { background: var(--gold); color: var(--ink); transform: scale(1.12) rotate(10deg); }
+.step h5 { font-size: 1.1rem; }
+.step p { font-size: .85rem; color: var(--muted); }
+
+/* ---------- 10. CALCULATOR ---------- */
+.calc-section { background: var(--ink); }
+.calc-box {
+  background: var(--ink-soft); border: 1px solid #3a322c; border-radius: var(--radius);
+  padding: 40px; color: #ddd;
+}
+.calc-box label { color: var(--gold); font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.calc-box .form-select {
+  background-color: #14110f; color: #fff; border: 1px solid #4a4038; padding: 12px;
+}
+.form-range::-webkit-slider-thumb { background: var(--gold); }
+.form-range::-moz-range-thumb { background: var(--gold); }
+.calc-result {
+  background: linear-gradient(135deg, var(--gold), #e3c58f); border-radius: var(--radius);
+  padding: 34px; color: var(--ink); text-align: center; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.calc-result h2 { font-size: 2.3rem; }
+.calc-result small { color: #4a3b22; }
+
+/* ---------- 11. TESTIMONIALS ---------- */
+.testi-card {
+  background: #fff; border-radius: var(--radius); padding: 46px 40px;
+  max-width: 760px; margin: 0 auto; text-align: center; box-shadow: var(--shadow); position: relative;
+}
+.testi-card .quote { font-size: 3.4rem; color: var(--gold); line-height: .5; font-family: var(--font-head); }
+.testi-card p { font-size: 1.05rem; font-style: italic; }
+.testi-card .who { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; }
+.testi-card .who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.carousel-indicators [data-bs-target] { background-color: var(--terra); width: 10px; height: 10px; border-radius: 50%; }
+.stars { color: var(--gold); }
+
+/* ---------- 12. FORMS & CTA ---------- */
+.cta {
+  background: linear-gradient(rgba(20,17,15,.85), rgba(20,17,15,.85)),
+              url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=70') center/cover fixed;
+  color: #fff;
+}
+.cta h2 { color: #fff; }
+.form-card { background: #fff; border-radius: var(--radius); padding: 38px; box-shadow: var(--shadow); }
+.form-card .form-control, .form-card .form-select {
+  border: 1px solid var(--sand); padding: 13px 16px; border-radius: 10px; background: #fcfaf6;
+}
+.form-card .form-control:focus, .form-card .form-select:focus {
+  border-color: var(--gold); box-shadow: 0 0 0 .2rem rgba(200,164,106,.25);
+}
+.info-card {
+  background: var(--ink); color: #cfc6b8; border-radius: var(--radius); padding: 38px; height: 100%;
+}
+.info-card h4 { color: #fff; }
+.info-item { display: flex; gap: 16px; margin-bottom: 24px; }
+.info-item i {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; background: rgba(200,164,106,.15);
+  color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.info-item a { color: #cfc6b8; }
+.info-item a:hover { color: var(--gold); }
+.map-box iframe { width: 100%; height: 380px; border: 0; border-radius: var(--radius); filter: grayscale(.4); }
+
+/* About page extras */
+.team-card { text-align: center; }
+.team-card .photo { position: relative; border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+.team-card img { width: 100%; height: 340px; object-fit: cover; transition: .6s; }
+.team-card:hover img { transform: scale(1.08); }
+.team-card .social {
+  position: absolute; left: 0; right: 0; bottom: -60px; display: flex; justify-content: center; gap: 10px; transition: .4s;
+}
+.team-card:hover .social { bottom: 16px; }
+.team-card .social a {
+  width: 38px; height: 38px; background: var(--gold); color: var(--ink); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.timeline { position: relative; padding-left: 30px; border-left: 2px solid var(--gold); }
+.timeline .t-item { position: relative; margin-bottom: 34px; }
+.timeline .t-item::before {
+  content: ''; position: absolute; left: -39px; top: 6px; width: 16px; height: 16px;
+  background: var(--terra); border-radius: 50%; border: 3px solid var(--cream);
+}
+.timeline .year { color: var(--terra); font-weight: 700; font-family: var(--font-head); font-size: 1.2rem; }
+
+/* FAQ */
+.accordion-button:not(.collapsed) { background: var(--ink); color: var(--gold); box-shadow: none; }
+.accordion-button:focus { box-shadow: none; }
+.accordion-item { border-radius: 12px !important; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--sand); }
+
+/* ---------- 13. FOOTER ---------- */
+footer { background: #0d0b0a; color: #a89f92; padding: 80px 0 0; }
+footer h5 { color: #fff; font-size: 1.15rem; margin-bottom: 22px; }
+footer a { color: #a89f92; display: inline-block; }
+footer a:hover { color: var(--gold); transform: translateX(5px); }
+footer ul { list-style: none; padding: 0; }
+footer ul li { margin-bottom: 10px; }
+.social-row a {
+  width: 40px; height: 40px; border: 1px solid #3a322c; border-radius: 50%; margin-right: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.social-row a:hover { background: var(--gold); color: var(--ink); transform: translateY(-4px); border-color: var(--gold); }
+.copyright { border-top: 1px solid #231e1a; margin-top: 50px; padding: 22px 0; font-size: .85rem; }
+
+/* Floating buttons */
+.float-wa {
+  position: fixed; left: 22px; bottom: 22px; z-index: 999; width: 54px; height: 54px;
+  background: #25d366; color: #fff; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 1.7rem; box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  animation: pulse 2s infinite;
+}
+.float-wa:hover { color: #fff; transform: scale(1.1); }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37,211,102,.6); }
+  70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+#toTop {
+  position: fixed; right: 22px; bottom: 22px; z-index: 999; width: 46px; height: 46px;
+  background: var(--gold); color: var(--ink); border: 0; border-radius: 50%; font-size: 1.2rem;
+  opacity: 0; visibility: hidden; transition: .4s;
+}
+#toTop.show { opacity: 1; visibility: visible; }
+
+/* ---------- 14. SCROLL REVEAL ANIMATIONS ---------- */
+[data-reveal] { opacity: 0; transition: opacity .9s ease, transform .9s ease; }
+[data-reveal="up"]    { transform: translateY(50px); }
+[data-reveal="left"]  { transform: translateX(-60px); }
+[data-reveal="right"] { transform: translateX(60px); }
+[data-reveal="zoom"]  { transform: scale(.88); }
+[data-reveal].revealed { opacity: 1; transform: none; }
+
+/* Hero text line reveal */
+.line-mask { display: block; overflow: hidden; }
+.line-mask span { display: block; transform: translateY(110%); animation: lineUp 1s cubic-bezier(.2,.8,.2,1) forwards; }
+.line-mask:nth-child(2) span { animation-delay: .15s; }
+.line-mask:nth-child(3) span { animation-delay: .3s; }
+@keyframes lineUp { to { transform: translateY(0); } }
+
+/* Skip link (keyboard users) */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 10000; background: var(--gold); color: var(--ink);
+  padding: 10px 18px; border-radius: 8px; font-weight: 600; transition: top .2s;
+}
+.skip-link:focus { top: 12px; color: var(--ink); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* Small screens: slide up (not sideways) so nothing sticks out of the page */
+@media (max-width: 991px) {
+  [data-reveal="left"], [data-reveal="right"] { transform: translateY(40px); }
+}
+
+/* People who asked their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .line-mask span { transform: none !important; }
+  .hero-slide { transform: none !important; }
+}
+
+/* ---------- 15. RESPONSIVE ---------- */
+@media (max-width: 991px) {
+  section { padding: 70px 0; }
+  .main-nav { background: rgba(20,17,15,.96); padding: 12px 0; }
+  .navbar-collapse { padding: 16px 0; }
+  .hero-card { display: none; }
+  .process-wrap::before { display: none; }
+  .step { margin-bottom: 30px; }
+  .about-imgs { padding: 0 0 50px 0; }
+  .about-imgs .big { height: 360px; }
+  .page-banner { background-attachment: scroll; }
+  .cta { background-attachment: scroll; }
+}
+@media (max-width: 575px) {
+  .hero { min-height: 600px; }
+  .calc-box, .form-card, .info-card { padding: 26px 20px; }
+  .testi-card { padding: 34px 22px; }
+  .stat-box h2 { font-size: 2.4rem; }
+  .exp-badge { left: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader-logo">NIRMAAN</div>
+  <div class="loader-bar"><span></span></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg main-nav">
+  <div class="container">
+    <a class="navbar-brand brand" href="index.html">NIRMAAN<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn btn-gold" href="contact.html">Free Consultation</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main id="main" tabindex="-1">
+
+<!-- Page banner -->
+<section class="page-banner" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=70')">
+  <div class="inner">
+    <div class="crumb"><a href="index.html">HOME</a> / SERVICES</div>
+    <h1>Our Services</h1>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="text-center mb-4" data-reveal="up">
+      <span class="sec-tag">Three Pillars</span>
+      <h2 class="sec-title">Everything Under <em>One Roof</em></h2>
+      <div class="sec-line"></div>
+    </div>
+    <ul class="nav nav-pills pillar-tabs justify-content-center mb-5" data-reveal="up">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#t1">Construction</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t2">Architecture</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t3">Interior</button></li>
+    </ul>
+    <div class="tab-content" data-reveal="up">
+      <div class="tab-pane fade show active" id="t1">
+        <div class="row align-items-center g-4 g-lg-5">
+          <div class="col-lg-6"><img loading="lazy" decoding="async" class="pillar-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=70" alt="Building under construction"></div>
+          <div class="col-lg-6"><h3>Construction Services</h3><p>Strong foundation, quality material and daily site supervision. We build to last.</p>
+            <ul class="check-list"><li>Residential houses and villas</li><li>Apartments and builder floors</li><li>Commercial buildings and showrooms</li><li>Renovation and extension work</li><li>Civil, plumbing and electrical work</li></ul></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="t2">
+        <div class="row align-items-center g-4 g-lg-5">
+          <div class="col-lg-6"><img loading="lazy" decoding="async" class="pillar-img" src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=70" alt="Luxury villa exterior"></div>
+          <div class="col-lg-6"><h3>Architecture &amp; Planning</h3><p>A good plan saves lakhs later. We design layouts that use every square foot wisely.</p>
+            <ul class="check-list"><li>2D floor plans and 3D elevations</li><li>Vastu friendly planning</li><li>Structural and working drawings</li><li>Map approval support</li><li>Landscape and exterior design</li></ul></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="t3">
+        <div class="row align-items-center g-4 g-lg-5">
+          <div class="col-lg-6"><img loading="lazy" decoding="async" class="pillar-img" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=70" alt="Stylish living room interior"></div>
+          <div class="col-lg-6"><h3>Interior Design</h3><p>Beautiful and practical interiors that match your taste and your budget.</p>
+            <ul class="check-list"><li>Living room, bedroom and foyer design</li><li>Modular kitchen and wardrobes</li><li>False ceiling and lighting</li><li>Flooring, wall design and painting</li><li>Custom furniture and decor</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-sec">
+  <div class="container">
+    <div class="text-center mb-4" data-reveal="up">
+      <span class="sec-tag" style="color:var(--gold)">Interior Specialities</span>
+      <h2 class="sec-title">End To End <em style="color:var(--gold)">Interior</em> Solutions</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up"><i class="bi bi-lamp"></i><h5 class="mt-3 text-white">Living Room</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="100"><i class="bi bi-moon-stars"></i><h5 class="mt-3 text-white">Bedroom</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="200"><i class="bi bi-egg-fried"></i><h5 class="mt-3 text-white">Modular Kitchen</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="300"><i class="bi bi-droplet"></i><h5 class="mt-3 text-white">Bathroom</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up"><i class="bi bi-door-open"></i><h5 class="mt-3 text-white">Wardrobe</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="100"><i class="bi bi-tv"></i><h5 class="mt-3 text-white">TV Unit</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="200"><i class="bi bi-building"></i><h5 class="mt-3 text-white">Commercial</h5></div>
+      <div class="col-6 col-md-4 col-lg-3 icon-box" data-reveal="up" data-delay="300"><i class="bi bi-cup-straw"></i><h5 class="mt-3 text-white">Hospitality</h5></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row g-4 g-lg-5">
+      <div class="col-lg-5" data-reveal="left">
+        <span class="sec-tag">Warranty</span>
+        <h2 class="sec-title">Peace Of Mind <em>Guaranteed</em></h2>
+        <div class="sec-line"></div>
+        <p><b>Up to 10 years</b> on modular products and <b>1 year</b> on-site service warranty on painting, electrical and plumbing work.</p>
+      </div>
+      <div class="col-lg-7" data-reveal="right">
+        <div class="accordion" id="faq">
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#f1">How long does an interior project take?</button></h2><div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq"><div class="accordion-body">Most 2-3 BHK interiors are completed in about 45 working days after design approval.</div></div></div>
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f2">How does the payment work?</button></h2><div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">5% at booking, 50% when execution begins and the rest at final installation. Easy EMI is also available.</div></div></div>
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f3">Can I see the design before work starts?</button></h2><div id="f3" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Yes. We show live 3D designs so you can change anything before the work begins.</div></div></div>
+          <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f4">Do you work outside the city?</button></h2><div id="f4" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body">Yes, we take projects in nearby cities too. Contact us with your location.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row g-4 g-lg-5">
+      <div class="col-lg-4">
+        <a class="brand" href="index.html">NIRMAAN<span>.</span></a>
+        <p class="mt-3">From the first brick to the last cushion - we plan, build and furnish your space under one roof. Honest pricing, on-time delivery and a 10 year warranty.</p>
+        <div class="social-row mt-4">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h5>Our Services</h5>
+        <ul>
+          <li><a href="services.html">Construction</a></li>
+          <li><a href="services.html">Architecture</a></li>
+          <li><a href="services.html">Residential Interiors</a></li>
+          <li><a href="services.html">Commercial Interiors</a></li>
+          <li><a href="services.html">Modular Kitchen</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact</h5>
+        <ul>
+          <li><i class="bi bi-geo-alt text-warning"></i> 123, Design Plaza, Your City, India</li>
+          <li><i class="bi bi-telephone text-warning"></i> <a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><i class="bi bi-envelope text-warning"></i> <a href="mailto:info@nirmaanstudio.in">info@nirmaanstudio.in</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright text-center">&copy; 2026 Nirmaan Studio. All rights reserved.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919876543210?text=Hi" class="float-wa" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+<button id="toTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Internal JavaScript (same as assets/js/main.js) -->
+<script>
+/* =====================================================
+   NIRMAAN STUDIO - Main JavaScript
+   1 Preloader | 2 Navbar | 3 Hero slider | 4 Scroll reveal
+   5 Counters | 6 Project filter | 7 Calculator | 8 Form status
+   9 Back to top | 10 Image fallback | 11 Hero mouse parallax
+   ===================================================== */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ---------- 1. PRELOADER ---------- */
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', function () {
+    setTimeout(function () { if (preloader) preloader.classList.add('hide'); }, 400);
+  });
+  // safety: hide even if some image is slow
+  setTimeout(function () { if (preloader) preloader.classList.add('hide'); }, 3500);
+
+  /* ---------- 2. NAVBAR (change style on scroll) ---------- */
+  const nav = document.querySelector('.main-nav');
+  function onScroll() {
+    if (window.scrollY > 60) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    const topBtn = document.getElementById('toTop');
+    if (topBtn) topBtn.classList.toggle('show', window.scrollY > 500);
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  /* ---------- 3. HERO SLIDER (auto change background) ---------- */
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length > 1) {
+    let current = 0;
+    setInterval(function () {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 6000);
+  }
+
+  /* ---------- 4. SCROLL REVEAL ---------- */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        const delay = entry.target.getAttribute('data-delay') || 0;
+        setTimeout(function () { entry.target.classList.add('revealed'); }, delay);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+  /* ---------- 5. NUMBER COUNTERS ---------- */
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = +el.getAttribute('data-target');
+      const step = target / 90;
+      let value = 0;
+      const timer = setInterval(function () {
+        value += step;
+        if (value >= target) { value = target; clearInterval(timer); }
+        el.textContent = Math.floor(value);
+      }, 20);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function (c) { counterObserver.observe(c); });
+
+  /* ---------- 6. PROJECT FILTER ---------- */
+  const filterBtns = document.querySelectorAll('.btn-f');
+  const items = document.querySelectorAll('.project-item');
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const type = btn.getAttribute('data-filter');
+      items.forEach(function (item) {
+        if (type === 'all' || item.getAttribute('data-type') === type) item.classList.remove('hide');
+        else item.classList.add('hide');
+      });
+    });
+  });
+
+  /* Project image popup (modal) on projects page */
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  document.querySelectorAll('.project-card[data-bs-toggle="modal"]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      modalImg.src = card.querySelector('img').src;
+      modalTitle.textContent = card.getAttribute('data-title');
+    });
+  });
+
+  /* ---------- 7. PRICE CALCULATOR ---------- */
+  const area = document.getElementById('calcArea');
+  if (area) {
+    const areaVal = document.getElementById('areaVal');
+    const type = document.getElementById('calcType');
+    const pack = document.getElementById('calcPack');
+    const out = document.getElementById('calcOut');
+    const outRange = document.getElementById('calcRange');
+
+    // Approx rate per sq.ft (change these numbers as you like)
+    const rates = { interior: 1400, construction: 1900, both: 3000 };
+    const multi = { basic: 1, premium: 1.35, luxury: 1.8 };
+
+    function formatINR(n) { return '₹ ' + Math.round(n).toLocaleString('en-IN'); }
+
+    function calculate() {
+      areaVal.textContent = area.value;
+      const total = area.value * rates[type.value] * multi[pack.value];
+      out.textContent = formatINR(total);
+      outRange.textContent = formatINR(total * 0.9) + '  -  ' + formatINR(total * 1.1);
+    }
+    [area, type, pack].forEach(function (el) { el.addEventListener('input', calculate); });
+    calculate();
+  }
+
+  /* ---------- 8. FORM STATUS MESSAGE (from backend redirect) ---------- */
+  const params = new URLSearchParams(window.location.search);
+  const alertBox = document.getElementById('formAlert');
+  if (alertBox && params.get('status')) {
+    const status = params.get('status');
+    const messages = {
+      success: 'Thank you! Your enquiry has been sent. We will call you soon.',
+      invalid: 'Please check your details: name, a valid phone number (10-15 digits), a correct email and a service.',
+      busy:    'Too many enquiries from this device. Please try again after a few minutes or call us.',
+      error:   'Sorry, something went wrong on our side. Please try again later or call us.'
+    };
+    alertBox.className = (status === 'success') ? 'alert alert-success' : 'alert alert-danger';
+    alertBox.textContent = messages[status] || messages.error;
+    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ---------- 9. BACK TO TOP ---------- */
+  const toTop = document.getElementById('toTop');
+  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  /* ---------- 10. IMAGE FALLBACK ---------- */
+  document.querySelectorAll('img').forEach(function (img) {
+    img.addEventListener('error', function () { img.classList.add('img-fallback'); });
+  });
+
+  /* ---------- 11. HERO MOUSE PARALLAX ---------- */
+  const heroCard = document.querySelector('.hero-card');
+  const hero = document.querySelector('.hero');
+  if (hero && heroCard && window.innerWidth > 991) {
+    hero.addEventListener('mousemove', function (e) {
+      const x = (window.innerWidth / 2 - e.clientX) / 60;
+      const y = (window.innerHeight / 2 - e.clientY) / 60;
+      heroCard.style.marginRight = x + 'px';
+      heroCard.style.marginBottom = y + 'px';
+    });
+  }
+});
+
+</script>
+</body>
+</html>
